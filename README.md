@@ -1,4 +1,22 @@
-# client-register-api
+## To-do:
+
+- [] Tabela Users
+    - [] Username
+    - [] Senha
+- [] Tabela Cliente
+    - [] Nome (obrigatório, aceitando apenas letras)
+    - [] CPF (obrigatório, validado e apenas números.)
+    - [] Email (obrigatório e único)
+    - [] Endereços
+- [] Tabela Endereço
+    - [] Número (obrigatório)
+    - [] CEP (obrigatório e validado)
+    - [] Complemento.
+- [] Autenticação JWT
+- [] Conexão com MySQL
+
+
+<!-- # client-register-api
 
 a [Sails v1](https://sailsjs.com) application
 
@@ -14,7 +32,7 @@ a [Sails v1](https://sailsjs.com) application
 
 ### Version info
 
-This app was originally generated on Sun Nov 24 2019 13:04:25 GMT-0200 (Brasilia Summer Time) using Sails v1.2.3.
+This app was originally generated on Sun Nov 24 2019 13:04:25 GMT-0200 (Brasilia Summer Time) using Sails v1.2.3. -->
 
 <!-- Internally, Sails used [`sails-generate@1.16.13`](https://github.com/balderdashy/sails-generate/tree/v1.16.13/lib/core-generators/new). -->
 
