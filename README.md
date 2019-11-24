@@ -8,10 +8,10 @@
     - [x] CPF (obrigatório, validado e apenas números.)
     - [x] Email (obrigatório e único)
     - [] Endereços
-- [] Tabela Endereço
-    - [] Número (obrigatório)
-    - [] CEP (obrigatório e validado)
-    - [] Complemento.
+- [x] Tabela Endereço
+    - [x] Número (obrigatório)
+    - [x] CEP (obrigatório e validado)
+    - [x] Complemento
 - [] Autenticação JWT
 - [] Conexão com MySQL
 
