@@ -3,10 +3,10 @@
 - [x] Tabela Users
     - [x] Username
     - [x] Senha
-- [] Tabela Cliente
-    - [] Nome (obrigatório, aceitando apenas letras)
-    - [] CPF (obrigatório, validado e apenas números.)
-    - [] Email (obrigatório e único)
+- [x] Tabela Cliente
+    - [x] Nome (obrigatório, aceitando apenas letras)
+    - [x] CPF (obrigatório, validado e apenas números.)
+    - [x] Email (obrigatório e único)
     - [] Endereços
 - [] Tabela Endereço
     - [] Número (obrigatório)
