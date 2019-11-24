@@ -1,8 +1,8 @@
 ## To-do:
 
-- [] Tabela Users
-    - [] Username
-    - [] Senha
+- [x] Tabela Users
+    - [x] Username
+    - [x] Senha
 - [] Tabela Cliente
     - [] Nome (obrigatório, aceitando apenas letras)
     - [] CPF (obrigatório, validado e apenas números.)
