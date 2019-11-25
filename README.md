@@ -7,12 +7,13 @@
     - [x] Nome (obrigatório, aceitando apenas letras)
     - [x] CPF (obrigatório, validado e apenas números.)
     - [x] Email (obrigatório e único)
-    - [] Endereços
+    - [x] Endereços (relação na tabela de endereços)
 - [x] Tabela Endereço
     - [x] Número (obrigatório)
     - [x] CEP (obrigatório e validado)
     - [x] Complemento
-- [] Autenticação JWT
+    - [x] Dono
+- [ ] Autenticação JWT
 - [x] Conexão com MySQL
 
 
