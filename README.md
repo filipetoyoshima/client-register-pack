@@ -13,7 +13,7 @@
     - [x] CEP (obrigatório e validado)
     - [x] Complemento
 - [] Autenticação JWT
-- [] Conexão com MySQL
+- [x] Conexão com MySQL
 
 
 <!-- # client-register-api
