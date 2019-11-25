@@ -1,7 +1,31 @@
 import React from 'react';
 
 class LoginScreen extends React.Component {
-    state = {}
+
+    constructor(props) {
+        super(props);
+        this.state = {
+            username: "",
+            password: "",
+        }
+        this.handleInputChange = this.handleInputChange.bind(this);
+        this.handleSubmit = this.handleSubmit.bind(this);
+    }
+
+    handleInputChange(event) {
+        const value = event.target.value;
+        const field = event.target.name;
+
+        this.setState({
+            [field]: value,
+        })
+    }
+
+    handleSubmit(event) {
+        console.log(`This is a very beautiful state: ${this.state}`);
+        event.preventDefault();
+    }
+
     render() {
         return (
             <div
@@ -21,19 +45,24 @@ class LoginScreen extends React.Component {
                             <h2>Entre para continuar</h2>
                         </div>
                         <div className="card-body text-left">
-                            <form>
+                            <form onSubmit={this.handleSubmit}>
                                 <div className="form-group">
                                     <label>Nome de Usuário</label>
                                     <input
+                                        name="username"
                                         className="form-control"
                                         placeholder="Inserir nome de usuário"
+                                        onChange={this.handleInputChange}
                                     />
                                 </div>
                                 <div className="form-group">
-                                    <label>Nome de Usuário</label>
+                                    <label>Senha</label>
                                     <input
+                                        name="password"
+                                        type="password"
                                         className="form-control"
                                         placeholder="Inserir nome de usuário"
+                                        onChange={this.handleInputChange}
                                     />
                                 </div>
                                 <button
