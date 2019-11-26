@@ -1,7 +1,8 @@
 import React from 'react';
-
 import axios from 'axios';
+
 import req from './../../requests';
+import DeleteModal from '../../components/deleteModal';
 import ClientCard from './../../components/clientCard';
 
 export default class ClientsScreen extends React.Component {
@@ -9,11 +10,33 @@ export default class ClientsScreen extends React.Component {
         super(props);
         this.state = {
             clients: [],
+            isModalOpen: false,
+            willDelete: null,
         }
+        this.openDeleteModal = this.openDeleteModal.bind(this);
+        this.closeModal = this.closeModal.bind(this);
+        this.deleteClient = this.deleteClient.bind(this);
+    }
+
+    openDeleteModal(clientToDelete) {
+        this.setState({
+            willDelete: clientToDelete,
+            isModalOpen: true,
+        })
+    }
+
+    closeModal() {
+        this.setState({
+            isModalOpen: false,
+        })
+    }
+
+
+    deleteClient() {
+        console.log("will send delete requisition", this.state.willDelete)
     }
 
     componentDidMount() {
-        console.log(req.client);
         axios.get(req.client)
             .then(response => {
                 console.log(response.data)
@@ -42,9 +65,18 @@ export default class ClientsScreen extends React.Component {
                 </div>
                 <div className=''>
                     {this.state.clients.map((client, i) => 
-                        <ClientCard key={`client ${i}`} client={client}/>
+                        <ClientCard
+                            key={`client ${i}`}
+                            client={client}
+                            openModal={this.openDeleteModal}
+                        />
                     )}
                 </div>
+                <DeleteModal
+                    show={this.state.isModalOpen}
+                    close={this.closeModal}
+                    delete={this.deleteClient}
+                />
             </div>
         )
     }

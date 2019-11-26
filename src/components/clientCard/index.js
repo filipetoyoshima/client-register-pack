@@ -1,7 +1,7 @@
 import React from 'react'
-
 import { MdModeEdit } from 'react-icons/md';
 import { FaTrash } from 'react-icons/fa';
+
 import styles from './styles';
 
 export default class ClientCard extends React.Component {
@@ -12,7 +12,6 @@ export default class ClientCard extends React.Component {
 
     render() {
         let client = this.props.client;
-        console.log(client);
         
         return (
             <div 
@@ -27,6 +26,7 @@ export default class ClientCard extends React.Component {
                         type='button'
                         className='btn btn-danger'
                         style={styles.button}
+                        onClick={() => this.props.openModal(client.cpf)}
                     >
                         <FaTrash
                             style={{
