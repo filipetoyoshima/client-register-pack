@@ -28,12 +28,23 @@ export default class ClientsScreen extends React.Component {
 
     render() {
         return (
-            <div>
-                {this.state.clients.map((client, i) => 
-                    <div key={`${i} value`}>
-                        <ClientCard client={client}/>
-                    </div>
-                )}
+            <div className='container'>
+                <div
+                    className='text-center'
+                    style={{
+                        marginTop: '15px',
+                    }}
+                >
+                    <h1 className='display-4'>Clientes Cadastrados</h1>
+                    <button type='button' className='btn btn-primary'>
+                        Novo Cliente
+                    </button>
+                </div>
+                <div className=''>
+                    {this.state.clients.map((client, i) => 
+                        <ClientCard key={`client ${i}`} client={client}/>
+                    )}
+                </div>
             </div>
         )
     }
