@@ -33,7 +33,22 @@ class ClientsScreen extends React.Component {
     }
 
     deleteClient() {
-        console.log("will send delete requisition", this.state.willDelete)
+        axios.delete(
+            req.client,
+            {
+                headers: {},
+                data: {
+                    cpf: this.state.willDelete
+                }
+            }
+        )
+            .then(response => {
+                this.componentDidMount();
+            })
+            .catch(err => {
+                alert(err);
+            })
+        this.closeModal();
     }
 
     componentDidMount() {
