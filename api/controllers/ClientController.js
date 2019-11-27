@@ -91,7 +91,6 @@ module.exports = {
         },...]
       }
     */
-    console.log(req.body);
 
     var flaverr = require('flaverr');
 
@@ -108,10 +107,11 @@ module.exports = {
           throw flaverr('E_UPDATE_CLIENT', new Error(err));
         })
       
-      Address.destroy({owner: oldCpf}).usingConnection(db)
+      Address.destroy({owner: req.body.oldCpf}).usingConnection(db)
         .catch(err => {
           throw flaverr('E_DESTROY_OLD_ADDRESSES', new Error(err));
         });
+
       let addressess = req.body.addresses.map((address) => {
         return {
           ...address,
@@ -132,5 +132,6 @@ module.exports = {
     return res.status(200).json({
       msg: 'cadastro atualizado',
     })
-  }
+  },
+
 };
