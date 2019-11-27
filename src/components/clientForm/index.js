@@ -1,18 +1,20 @@
 import React from 'react';
 import cpf from 'cpf';
-import { Formik, Form, Field, ErrorMessage } from 'formik';
+import { Formik, Form, Field, ErrorMessage, FieldArray } from 'formik';
 import * as Yup from 'yup';
 
 const ClientSchema = Yup.object().shape({
     name: Yup.string()
         .matches(
-            /^[a-zA-Z0-9\u00C0-\u00D6\u00D8-\u00f6\u00f8-\u00ff\']+( [a-zA-Z0-9\u00C0-\u00D6\u00D8-\u00f6\u00f8-\u00ff\']+)*$/,
+            /^[a-zA-Z0-9\u00C0-\u00D6\u00D8-\u00f6\u00f8-\u00ff']+( [a-zA-Z0-9\u00C0-\u00D6\u00D8-\u00f6\u00f8-\u00ff']+)*$/,
             "O nome deve conter apenas letras e apenas um espaço em branco entre palavras"
         )
         .required("Obrigatório"),
+    
     email: Yup.string()
         .email("exemplo@mail.com")
         .required("Obrigatório"),
+    
     cpf: Yup.string()
         .matches(
             /^[0-9]*$/,
@@ -23,8 +25,12 @@ const ClientSchema = Yup.object().shape({
             'is-valid-cpf',
             'Não é um CPF válido',
             (value) => {return cpf.isValid(value)}
-        )
-        
+        ),
+    
+    number: Yup.number()
+        .integer("O número deve ser inteiro")
+        .positive("Existe endereço negativo?")
+        .required("Número obrigatório")
 })
 
 export default class ClientForm extends React.Component {
@@ -36,6 +42,7 @@ export default class ClientForm extends React.Component {
                     name: '',
                     email: '',
                     cpf: '',
+                    addresses: [],
                 }}
                 validationSchema={ClientSchema}
                 onSubmit={(values, { setSubmitting, setErrors }) => {
@@ -45,6 +52,7 @@ export default class ClientForm extends React.Component {
                 }}
             >
                 {({
+                    values,
                     touched,
                     errors,
                     isSubmitting
@@ -98,6 +106,76 @@ export default class ClientForm extends React.Component {
                             />
                         </div>
 
+                        <FieldArray
+                            name="addresses"
+                            render={(arrayHelpers) => (
+                                <>
+                                {values.addresses.map((address, index) => {
+                                    
+                                    const name = `address[${index}]`
+
+                                    return (
+                                    <div key={`address${index}`}>
+                                        <div className='form-group'>
+                                            <label
+                                                htmlFor={`addresses.${index}.number`}
+                                            >
+                                                Número
+                                            </label>
+                                            <Field
+                                                name={`addresses.${index}.number`}
+                                                placeholder='23'
+                                                className={`form-control`}
+                                            />
+                                            <ErrorMessage
+                                                component='div'
+                                                name='number'
+                                                className='invalid-feedback'
+                                            />
+                                        </div>
+
+                                        <div className='form-group'>
+                                            <label
+                                                htmlFor={`addresses.${index}.cep`}
+                                            >
+                                                CEP
+                                            </label>
+                                            <Field
+                                                name={`addresses.${index}.cep`}
+                                                placeholder='1234512'
+                                                className='form-control'
+                                            />
+                                        </div>
+
+                                        <div className='form-group'>
+                                            <label
+                                                htmlFor={`addresses.${index}.complement`}
+                                            >
+                                                Complemento
+                                            </label>
+                                            <Field
+                                                name={`addresses.${index}.complement`}
+                                                placeholder='Bloco A, 8º andar'
+                                                className='form-control'
+                                            />
+                                        </div>
+                                    </div> )
+                                })}
+                                <button
+                                    type='button'
+                                    className='btn btn-primary'
+                                    onClick={() => arrayHelpers.push({
+                                        number: '',
+                                        cep: '',
+                                        complement: '',
+                                    })}
+                                >
+                                    Adicionar Endereço
+                                </button>
+                                </>
+                            )}
+                        />
+
                         <button
                             type='submit'
                             className='btn btn-primary'
@@ -109,6 +187,12 @@ export default class ClientForm extends React.Component {
                                 "Enviar"
                             }
                         </button>
+                        <pre>
+                            {JSON.stringify(values, null, 2)}
+                        </pre>
+                        <pre>
+                            {JSON.stringify(errors, null, 2)}
+                        </pre>
                     </Form>
                 )}
             </Formik>
