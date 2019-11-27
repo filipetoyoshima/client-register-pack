@@ -30,6 +30,7 @@ const Routes = () => (
             <Switch>
                 <Route exact path='/login' component={LoginScreen} />
                 <PrivateRoute exact path='/clients' component={ClientsScreen} />
+                <Redirect from="*" to="/clients"/>
             </Switch>
         </BrowserRouter>
 );
