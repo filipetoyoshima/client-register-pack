@@ -1,4 +1,5 @@
 import React from 'react';
+import cpf from 'cpf';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 import * as Yup from 'yup';
 
@@ -11,7 +12,19 @@ const ClientSchema = Yup.object().shape({
         .required("Obrigatório"),
     email: Yup.string()
         .email("exemplo@mail.com")
+        .required("Obrigatório"),
+    cpf: Yup.string()
+        .matches(
+            /^[0-9]*$/,
+            "Insira apenas números"
+        )
         .required("Obrigatório")
+        .test(
+            'is-valid-cpf',
+            'Não é um CPF válido',
+            (value) => {return cpf.isValid(value)}
+        )
+        
 })
 
 export default class ClientForm extends React.Component {
@@ -70,7 +83,7 @@ export default class ClientForm extends React.Component {
                         </div>
 
                         <div className='form-group'>
-                            <label htmlFor='cpf'>CPFl</label>
+                            <label htmlFor='cpf'>CPF</label>
                             <Field
                                 name='cpf'
                                 placeholder='12312312300'
