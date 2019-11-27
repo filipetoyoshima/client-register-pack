@@ -27,17 +27,21 @@ const ClientSchema = Yup.object().shape({
             (value) => {return cpf.isValid(value)}
         ),
     
-    number: Yup.number()
-        .integer("O número deve ser inteiro")
-        .positive("Existe endereço negativo?")
-        .required("Número obrigatório")
+    addresses: Yup.array().of(
+        Yup.object().shape({
+            number: Yup.number()
+                .integer("O número deve ser inteiro")
+                .positive("Existe endereço negativo?")
+                .required("Número obrigatório")
+        })
+    )
 })
 
 export default class ClientForm extends React.Component {
 
     render() {
         return (
-            <Formik
+            <Formik 
                 initialValues={{
                     name: '',
                     email: '',
@@ -111,11 +115,23 @@ export default class ClientForm extends React.Component {
                             render={(arrayHelpers) => (
                                 <>
                                 {values.addresses.map((address, index) => {
-                                    
-                                    const name = `address[${index}]`
+
+                                    var numberValid = ''
+                                    try {
+                                        if (touched.addresses[index].number && errors.addresses[index].number) {
+                                            numberValid = 'is-invalid';
+                                        }
+                                    } catch {}
+
+                                    var cepValid = ''
+                                    try {
+                                        if (touched.addresses[index].number && errors.addresses[index].number) {
+                                            cepValid = 'is-invalid';
+                                        }
+                                    } catch {}
 
                                     return (
-                                    <div key={`address${index}`}>
+                                    <div key={address.index}>
                                         <div className='form-group'>
                                             <label
                                                 htmlFor={`addresses.${index}.number`}
@@ -125,11 +141,12 @@ export default class ClientForm extends React.Component {
                                             <Field
                                                 name={`addresses.${index}.number`}
                                                 placeholder='23'
-                                                className={`form-control`}
+                                                type='number'
+                                                className={`form-control ${numberValid}`}
                                             />
                                             <ErrorMessage
                                                 component='div'
-                                                name='number'
+                                                name={`addresses.${index}.number`}
                                                 className='invalid-feedback'
                                             />
                                         </div>
@@ -142,6 +159,7 @@ export default class ClientForm extends React.Component {
                                             </label>
                                             <Field
                                                 name={`addresses.${index}.cep`}
+                                                type='number'
                                                 placeholder='1234512'
                                                 className='form-control'
                                             />
@@ -192,6 +210,9 @@ export default class ClientForm extends React.Component {
                         </pre>
                         <pre>
                             {JSON.stringify(errors, null, 2)}
+                        </pre>
+                        <pre>
+                            {JSON.stringify(touched, null, 2)}
                         </pre>
                     </Form>
                 )}
