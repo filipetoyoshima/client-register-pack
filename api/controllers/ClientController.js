@@ -8,6 +8,7 @@
 
 
 module.exports = {
+  // ----------------------------------------------------------------
   create: async function (req, res) {
     /* 
       Expected req.body: {
@@ -22,12 +23,6 @@ module.exports = {
       }
     */
     var flaverr = require('flaverr');
-
-    if (req.body.addresses.length == 0) {
-      return res.status(400).json({
-        err: "send at least one address"
-      })
-    }
 
     // Using transaction to save changes on db only if
     // everything with req is ok!
@@ -64,6 +59,7 @@ module.exports = {
     })
   },
 
+  // ---------------------------------------------------------------------------
   destroy: async function(req, res) {
     const cpf = req.body.cpf;
     console.log(typeof(cpf), cpf);
@@ -78,5 +74,63 @@ module.exports = {
         err: 'CPF inválido'
       })
     }
+  },
+
+  // ---------------------------------------------------------------------------
+  update: async function(req, res) {
+    /* 
+      Expected req.body: {
+        oldCpf,
+        name,
+        cpf,
+        email,
+        addresses: [{
+          number,
+          cep,
+          complement
+        },...]
+      }
+    */
+    console.log(req.body);
+
+    var flaverr = require('flaverr');
+
+    await sails.getDatastore().transaction(async (db) => {
+      Client.updateOne(
+        {cpf: req.body.oldCpf},
+        {
+          cpf: req.body.cpf,
+          name: req.body.name,
+          email: req.body.email,
+        })
+        .usingConnection(db)
+        .catch(err => {
+          throw flaverr('E_UPDATE_CLIENT', new Error(err));
+        })
+      
+      Address.destroy({owner: oldCpf}).usingConnection(db)
+        .catch(err => {
+          throw flaverr('E_DESTROY_OLD_ADDRESSES', new Error(err));
+        });
+      let addressess = req.body.addresses.map((address) => {
+        return {
+          ...address,
+          owner: req.body.cpf,
+        }
+      })
+
+      Address.createEach(addressess).usingConnection(db)
+        .catch(err => {
+          throw flaverr('E_CREATE_NEW_ADDRESSES', new Error(err));
+        });
+    })
+      .intercept('E_UPDATE_CLIENT', () => 'Erro de atualização dos dados do cliente')
+      .intercept('E_DESTROY_OLD_ADDRESSES', () => 'Erro ao desrtuir dados antigos de endereço')
+      .intercept('E_CREATE_NEW_ADDRESSES', () => 'Erro de criação de novos endereços');
+
+    console.log('HELLLLOOOOOOOOOO');
+    return res.status(200).json({
+      msg: 'cadastro atualizado',
+    })
   }
 };
