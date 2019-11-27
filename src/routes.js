@@ -4,7 +4,7 @@ import { isAuthenticated } from './services/auth';
 
 import LoginScreen from './screens/login';
 import ClientsScreen from './screens/clients';
-import Form from './components/clientForm';
+import NewClient from './screens/newClient';
 
 import {
     BrowserRouter,
@@ -31,7 +31,7 @@ const Routes = () => (
             <Switch>
                 <Route exact path='/login' component={LoginScreen} />
                 <PrivateRoute exact path='/clients' component={ClientsScreen} />
-                <PrivateRoute exact path='/new_client' component={Form} />
+                <PrivateRoute exact path='/new_client' component={NewClient} />
                 <Redirect from="*" to="/clients"/>
             </Switch>
         </BrowserRouter>

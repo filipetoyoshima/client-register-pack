@@ -17,7 +17,6 @@ class ClientsScreen extends React.Component {
         this.openDeleteModal = this.openDeleteModal.bind(this);
         this.closeModal = this.closeModal.bind(this);
         this.deleteClient = this.deleteClient.bind(this);
-        this.goToNewClient = this.goToNewClient.bind(this);
     }
 
     openDeleteModal(clientToDelete) {
@@ -61,7 +60,6 @@ class ClientsScreen extends React.Component {
                 >
                     <h1 className='display-4'>Clientes Cadastrados</h1>
                     <Link
-                        type='button'
                         className='btn btn-primary'
                         to='/new_client'
                     >

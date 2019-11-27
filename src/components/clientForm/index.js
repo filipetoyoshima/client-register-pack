@@ -4,6 +4,7 @@ import { Formik, Form, Field, ErrorMessage, FieldArray } from 'formik';
 import { FaTrash } from 'react-icons/fa';
 import ValidationSchema from './validationSchema';
 import req from './../../requests';
+import { Link } from 'react-router-dom';
 
 export default class ClientForm extends React.Component {
 
@@ -37,7 +38,7 @@ export default class ClientForm extends React.Component {
                     errors,
                     isSubmitting
                 }) => (
-                        <Form className='container'>
+                        <Form className='container text-left'>
                             <div className='form-group'>
                                 <label htmlFor='name'>Nome</label>
                                 <Field
@@ -203,7 +204,7 @@ export default class ClientForm extends React.Component {
                                             })}
                                             <button
                                                 type='button'
-                                                className='btn btn-secondary'
+                                                className='btn btn-success'
                                                 onClick={() => arrayHelpers.push({
                                                     number: '',
                                                     cep: '',
@@ -218,23 +219,32 @@ export default class ClientForm extends React.Component {
                                 </div>
                             </div>
                             
-
-                            <button
-                                type='submit'
-                                className='btn btn-primary'
-                                disabled={isSubmitting}
-                                style={{
-                                    margin: '20px 0 30px 0',
-                                    float: 'right',
-                                    width: '100px',
-                                }}
-                            >
-                                {isSubmitting ?
-                                    "Enviando..."
-                                    :
-                                    "Enviar"
-                                }
-                            </button>
+                            <div style={{margin: '20px 0 30px 0'}}>
+                                <button
+                                    type='submit'
+                                    className='btn btn-primary'
+                                    disabled={isSubmitting}
+                                    style={{
+                                        float: 'right',
+                                        width: '100px',
+                                    }}
+                                >
+                                    {isSubmitting ?
+                                        "Enviando..."
+                                        :
+                                        "Enviar"
+                                    }
+                                </button>
+                                <Link
+                                    className='btn btn-secondary'
+                                    to='/client'
+                                    style={{
+                                        float: 'left',
+                                    }}
+                                >
+                                    Voltar
+                                </Link>
+                            </div>
 
                         </Form>
                     )}
