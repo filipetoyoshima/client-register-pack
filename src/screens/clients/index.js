@@ -1,11 +1,12 @@
 import React from 'react';
 import axios from 'axios';
+import { withRouter, Link } from 'react-router-dom';
 
 import req from './../../requests';
 import DeleteModal from '../../components/deleteModal';
 import ClientCard from './../../components/clientCard';
 
-export default class ClientsScreen extends React.Component {
+class ClientsScreen extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -16,6 +17,7 @@ export default class ClientsScreen extends React.Component {
         this.openDeleteModal = this.openDeleteModal.bind(this);
         this.closeModal = this.closeModal.bind(this);
         this.deleteClient = this.deleteClient.bind(this);
+        this.goToNewClient = this.goToNewClient.bind(this);
     }
 
     openDeleteModal(clientToDelete) {
@@ -30,7 +32,6 @@ export default class ClientsScreen extends React.Component {
             isModalOpen: false,
         })
     }
-
 
     deleteClient() {
         console.log("will send delete requisition", this.state.willDelete)
@@ -59,9 +60,13 @@ export default class ClientsScreen extends React.Component {
                     }}
                 >
                     <h1 className='display-4'>Clientes Cadastrados</h1>
-                    <button type='button' className='btn btn-primary'>
+                    <Link
+                        type='button'
+                        className='btn btn-primary'
+                        to='/new_client'
+                    >
                         Novo Cliente
-                    </button>
+                    </Link>
                 </div>
                 <div className=''>
                     {this.state.clients.map((client, i) => 
@@ -81,3 +86,5 @@ export default class ClientsScreen extends React.Component {
         )
     }
 }
+
+export default withRouter(ClientsScreen);

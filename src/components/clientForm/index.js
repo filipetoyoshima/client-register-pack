@@ -1,7 +1,9 @@
 import React from 'react';
+import axios from 'axios';
 import { Formik, Form, Field, ErrorMessage, FieldArray } from 'formik';
 import { FaTrash } from 'react-icons/fa';
 import ValidationSchema from './validationSchema';
+import req from './../../requests';
 
 export default class ClientForm extends React.Component {
 
@@ -15,9 +17,17 @@ export default class ClientForm extends React.Component {
                     addresses: [],
                 }}
                 validationSchema={ValidationSchema}
-                onSubmit={(values, { setSubmitting, setErrors }) => {
+                onSubmit={ async (values, { setSubmitting, setErrors }) => {
                     console.log(values)
-                    alert("Formulário validado!");
+                    try {
+                        const response = await axios.post(
+                            req.client,
+                            values
+                        )
+                        console.log(response);
+                    } catch {
+
+                    }
                     setSubmitting(false);
                 }}
             >
@@ -79,7 +89,7 @@ export default class ClientForm extends React.Component {
                                 <div className='card-header'>
                                     <span>Endereços</span>
                                 </div>
-                                <div className='card-body'>
+                                <div className='card-body text-center'>
                                     <FieldArray
                                     name="addresses"
                                     render={(arrayHelpers) => (
@@ -107,7 +117,7 @@ export default class ClientForm extends React.Component {
                                                 return (
                                                     <div
                                                         key={`addess.${index}`}
-                                                        className='card'
+                                                        className='card text-left'
                                                         style={{
                                                             marginTop: '14px',
                                                             marginBottom: '14px',
@@ -193,13 +203,12 @@ export default class ClientForm extends React.Component {
                                             })}
                                             <button
                                                 type='button'
-                                                className='btn btn-primary'
+                                                className='btn btn-secondary'
                                                 onClick={() => arrayHelpers.push({
                                                     number: '',
                                                     cep: '',
                                                     complement: '',
                                                 })}
-                                                style={{float: 'right'}}
                                             >
                                                 Adicionar Endereço
                                             </button>
@@ -214,6 +223,11 @@ export default class ClientForm extends React.Component {
                                 type='submit'
                                 className='btn btn-primary'
                                 disabled={isSubmitting}
+                                style={{
+                                    margin: '20px 0 30px 0',
+                                    float: 'right',
+                                    width: '100px',
+                                }}
                             >
                                 {isSubmitting ?
                                     "Enviando..."
