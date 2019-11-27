@@ -1,9 +1,7 @@
 import React from 'react';
-import axios from 'axios';
 import { Formik, Form, Field, ErrorMessage, FieldArray } from 'formik';
 import { FaTrash } from 'react-icons/fa';
 import ValidationSchema from './validationSchema';
-import req from './../../requests';
 import { Link } from 'react-router-dom';
 
 export default class ClientForm extends React.Component {
@@ -25,16 +23,7 @@ export default class ClientForm extends React.Component {
                 initialValues={initialValues}
                 validationSchema={ValidationSchema}
                 onSubmit={ async (values, { setSubmitting, setErrors }) => {
-                    console.log(values)
-                    try {
-                        const response = await axios.post(
-                            req.client,
-                            values
-                        )
-                        console.log(response);
-                    } catch {
-
-                    }
+                    await this.props.onSubmit(values);
                     setSubmitting(false);
                 }}
             >
