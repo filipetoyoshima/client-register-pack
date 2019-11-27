@@ -1,10 +1,11 @@
 import React from 'react'
 import { MdModeEdit } from 'react-icons/md';
 import { FaTrash } from 'react-icons/fa';
+import { withRouter, Link } from 'react-router-dom';
 
 import styles from './styles';
 
-export default class ClientCard extends React.Component {
+class ClientCard extends React.Component {
     constructor (props) {
         super(props);
         this.state = {};
@@ -34,17 +35,20 @@ export default class ClientCard extends React.Component {
                             }}
                         />
                     </button>
-                    <button
-                        type='button'
+                    <Link
                         className='btn btn-primary'
                         style={styles.button}
+                        to={{
+                            pathname: '/edit_client',
+                            state: {client}
+                        }}
                     >
                         <MdModeEdit
                             style={{
                                 marginTop: '-4px'
                             }}
                         />
-                    </button>
+                    </Link>
                 </div>
                 <div className='card-body row'>
                     <div className='col'>
@@ -62,3 +66,5 @@ export default class ClientCard extends React.Component {
         )
     }
 }
+
+export default withRouter(ClientCard)

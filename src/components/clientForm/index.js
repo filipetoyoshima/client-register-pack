@@ -9,14 +9,20 @@ import { Link } from 'react-router-dom';
 export default class ClientForm extends React.Component {
 
     render() {
+        let initialValues = {
+            name: '',
+            email: '',
+            cpf: '',
+            addresses: [],
+        }
+
+        if(this.props.initialValues) {
+            initialValues = this.props.initialValues;
+        }
+
         return (
             <Formik
-                initialValues={{
-                    name: '',
-                    email: '',
-                    cpf: '',
-                    addresses: [],
-                }}
+                initialValues={initialValues}
                 validationSchema={ValidationSchema}
                 onSubmit={ async (values, { setSubmitting, setErrors }) => {
                     console.log(values)

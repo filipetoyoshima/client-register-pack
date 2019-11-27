@@ -1,4 +1,5 @@
 import React from 'react';
+import { withRouter } from 'react-router-dom'; 
 
 class LoginScreen extends React.Component {
 
@@ -80,4 +81,4 @@ class LoginScreen extends React.Component {
     }
 }
 
-export default LoginScreen;
+export default withRouter(LoginScreen);

@@ -1,6 +1,6 @@
 import React from 'react'
 import ClientForm from './../../components/clientForm';
-import { withRouter } from 'react-router-dom'; 
+import { withRouter } from 'react-router-dom';
 
 class newClient extends React.Component {
     constructor(props) {
@@ -8,7 +8,9 @@ class newClient extends React.Component {
         this.state = {};
     }
 
-    render () {
+    render() {
+        console.log(this.props.location)
+
         return (
             <div className='container text-center'>
                 <div
@@ -17,9 +19,11 @@ class newClient extends React.Component {
                         marginTop: '15px',
                     }}
                 >
-                    <h1 className='display-4'>Novo Cliente</h1>                    
+                    <h1 className='display-4'>Editar Cliente</h1>
                 </div>
-                <ClientForm/>
+                <ClientForm
+                    initialValues={this.props.location.state.client}
+                />
             </div>
         )
     }
