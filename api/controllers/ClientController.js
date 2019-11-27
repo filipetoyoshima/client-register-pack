@@ -62,5 +62,21 @@ module.exports = {
     return res.status(200).json({
       msg: "ok",
     })
+  },
+
+  destroy: async function(req, res) {
+    const cpf = req.body.cpf;
+    console.log(typeof(cpf), cpf);
+    try {
+      await Address.destroy({owner: cpf});
+      await Client.destroy({cpf: cpf})
+        .then(response => {
+          res.status(200).json(response);
+        });
+    } catch {
+      res.status(400).json({
+        err: 'CPF inválido'
+      })
+    }
   }
 };

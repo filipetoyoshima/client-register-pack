@@ -21,6 +21,7 @@ module.exports.routes = {
 
   '/': { view: 'pages/homepage' },
   '/POST /client': 'ClientController.create',
+  '/DELETE /client/:cpf': 'ClientController.destroy',
 
   /***************************************************************************
   *                                                                          *
