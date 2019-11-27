@@ -2,9 +2,9 @@ import React from 'react';
 import { Formik, Form, Field, ErrorMessage, FieldArray } from 'formik';
 import { FaTrash } from 'react-icons/fa';
 import ValidationSchema from './validationSchema';
-import { Link } from 'react-router-dom';
+import { Link, withRouter } from 'react-router-dom';
 
-export default class ClientForm extends React.Component {
+class ClientForm extends React.Component {
 
     render() {
         let initialValues = {
@@ -23,7 +23,11 @@ export default class ClientForm extends React.Component {
                 initialValues={initialValues}
                 validationSchema={ValidationSchema}
                 onSubmit={ async (values, { setSubmitting, setErrors }) => {
-                    await this.props.onSubmit(values);
+                    let success = await this.props.onSubmit(values);
+                    if (success) {
+                        console.log(this.props.history);
+                        this.props.history.push('/client');
+                    }
                     setSubmitting(false);
                 }}
             >
@@ -247,3 +251,5 @@ export default class ClientForm extends React.Component {
         )
     }
 }
+
+export default withRouter(ClientForm);

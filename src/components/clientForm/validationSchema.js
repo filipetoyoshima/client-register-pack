@@ -48,7 +48,6 @@ const ClientSchema = Yup.object().shape({
                         try {
                             const response = await fetch(url)
                             const data = await response.json()
-                            console.log(data);
                             if (data.erro) {
                                 return false;
                             } else {
