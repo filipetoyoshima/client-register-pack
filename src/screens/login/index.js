@@ -1,5 +1,8 @@
 import React from 'react';
+import axios from 'axios';
+import req from './../../requests';
 import { withRouter } from 'react-router-dom'; 
+import { login } from './../../services/auth';
 
 class LoginScreen extends React.Component {
 
@@ -22,8 +25,13 @@ class LoginScreen extends React.Component {
         })
     }
 
-    handleSubmit(event) {
-        console.log(`This is a very beautiful state: ${this.state}`);
+    handleSubmit = async function(event) {
+        axios.post(req.login, this.state)
+            .then(response => {
+                login(response.data.tolken)
+                this.props.history.push('/clients');
+            })
+            .catch(err => alert(err));
         event.preventDefault();
     }
 
