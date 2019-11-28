@@ -21,7 +21,6 @@ class newClient extends React.Component {
                 req.client,
                 allValues
             )
-            console.log(response);
             return true;
         } catch {
             alert("Não foi possível atualizar o usuário");

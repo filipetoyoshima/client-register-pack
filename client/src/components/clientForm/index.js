@@ -25,7 +25,6 @@ class ClientForm extends React.Component {
                 onSubmit={ async (values, { setSubmitting, setErrors }) => {
                     let success = await this.props.onSubmit(values);
                     if (success) {
-                        console.log(this.props.history);
                         this.props.history.push('/client');
                     }
                     setSubmitting(false);

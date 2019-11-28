@@ -62,7 +62,6 @@ module.exports = {
   // ---------------------------------------------------------------------------
   destroy: async function(req, res) {
     const cpf = req.body.cpf;
-    console.log(typeof(cpf), cpf);
     try {
       await Address.destroy({owner: cpf});
       await Client.destroy({cpf: cpf})
@@ -128,7 +127,6 @@ module.exports = {
       .intercept('E_DESTROY_OLD_ADDRESSES', () => 'Erro ao desrtuir dados antigos de endereço')
       .intercept('E_CREATE_NEW_ADDRESSES', () => 'Erro de criação de novos endereços');
 
-    console.log('HELLLLOOOOOOOOOO');
     return res.status(200).json({
       msg: 'cadastro atualizado',
     })

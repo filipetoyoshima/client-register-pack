@@ -16,8 +16,6 @@ module.exports = {
       username: req.body.username,
       password: crypt,
     }
-
-    console.log(typeof(newUser.password));
     
     User.create(newUser)
       .then(msg => {

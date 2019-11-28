@@ -58,7 +58,6 @@ class ClientsScreen extends React.Component {
             headers: getAuth()
         })
             .then(response => {
-                console.log(response.data)
                 this.setState({
                     clients: response.data,
                 })

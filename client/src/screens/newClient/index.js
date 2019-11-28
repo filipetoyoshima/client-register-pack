@@ -18,7 +18,6 @@ class newClient extends React.Component {
                 values,
                 {headers: getAuth()}
             )
-            console.log(response);
             return true;
         } catch {
             alert("Não foi possível cadastrar o usuário");
