@@ -20,6 +20,7 @@ module.exports.routes = {
   ***************************************************************************/
 
   '/': { view: 'pages/homepage' },
+  'post /login': 'UserController.login',
   'post /client': 'ClientController.create',
   'delete /client/:cpf': 'ClientController.destroy',
   'patch /client': 'ClientController.update',
