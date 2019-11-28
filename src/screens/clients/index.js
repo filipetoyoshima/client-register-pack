@@ -3,6 +3,7 @@ import axios from 'axios';
 import { withRouter, Link } from 'react-router-dom';
 
 import req from './../../requests';
+import { logout } from './../../services/auth';
 import DeleteModal from '../../components/deleteModal';
 import ClientCard from './../../components/clientCard';
 
@@ -17,6 +18,7 @@ class ClientsScreen extends React.Component {
         this.openDeleteModal = this.openDeleteModal.bind(this);
         this.closeModal = this.closeModal.bind(this);
         this.deleteClient = this.deleteClient.bind(this);
+        this.endSession = this.endSession.bind(this);
     }
 
     openDeleteModal(clientToDelete) {
@@ -64,6 +66,11 @@ class ClientsScreen extends React.Component {
             });
     }
 
+    endSession() {
+        logout();
+        this.props.history.push('/login');
+    }
+
     render() {
         return (
             <div className='container'>
@@ -77,9 +84,18 @@ class ClientsScreen extends React.Component {
                     <Link
                         className='btn btn-primary'
                         to='/new_client'
+                        style={{margin: '5px'}}
                     >
                         Novo Cliente
                     </Link>
+                    <button
+                        type='button'
+                        className='btn btn-secondary'
+                        onClick={this.endSession}
+                        style={{margin: '5px'}}
+                    >
+                        Logout
+                    </button>
                 </div>
                 <div className=''>
                     {this.state.clients.map((client, i) => 

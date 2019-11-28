@@ -5,6 +5,8 @@ export const isAuthenticated = () => {
     return false;
 };
 
+// export const isAuthenticated = () => true;
+
 export const login = (value) => {
     localStorage.setItem('tolken', value);
 }
