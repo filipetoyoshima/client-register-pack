@@ -3,6 +3,7 @@ import axios from 'axios';
 import ClientForm from './../../components/clientForm';
 import { withRouter } from 'react-router-dom'; 
 import req from './../../requests';
+import { getAuth } from './../../services/auth';
 
 class newClient extends React.Component {
     constructor(props) {
@@ -14,7 +15,8 @@ class newClient extends React.Component {
         try {
             const response = await axios.post(
                 req.client,
-                values
+                values,
+                {headers: getAuth()}
             )
             console.log(response);
             return true;

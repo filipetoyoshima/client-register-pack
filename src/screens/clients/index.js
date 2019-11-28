@@ -3,7 +3,7 @@ import axios from 'axios';
 import { withRouter, Link } from 'react-router-dom';
 
 import req from './../../requests';
-import { logout } from './../../services/auth';
+import { logout, getAuth } from './../../services/auth';
 import DeleteModal from '../../components/deleteModal';
 import ClientCard from './../../components/clientCard';
 
@@ -54,7 +54,9 @@ class ClientsScreen extends React.Component {
     }
 
     componentDidMount() {
-        axios.get(req.client)
+        axios.get(req.client, {
+            headers: getAuth()
+        })
             .then(response => {
                 console.log(response.data)
                 this.setState({

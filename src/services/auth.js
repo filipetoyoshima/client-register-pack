@@ -5,6 +5,12 @@ export const isAuthenticated = () => {
     return false;
 };
 
+export const getAuth = () => {
+    return {
+        Authorization: `Bearer ${localStorage.getItem('tolken')}`
+    };
+}
+
 // export const isAuthenticated = () => true;
 
 export const login = (value) => {
