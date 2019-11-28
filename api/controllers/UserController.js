@@ -13,8 +13,6 @@ module.exports = {
     User.findOne({username: req.body.username})
       .then(user => {
         if (user.username === req.body.username) {
-          console.log(user);
-          console.log(user.toJSON());
           res.status(200).json({
             tolken: jwt.sign(user.toJSON(), 'secret'),
           })
