@@ -38,7 +38,7 @@ class ClientsScreen extends React.Component {
         axios.delete(
             req.client,
             {
-                headers: {},
+                headers: getAuth(),
                 data: {
                     cpf: this.state.willDelete
                 }
