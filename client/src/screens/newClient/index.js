@@ -13,7 +13,7 @@ class newClient extends React.Component {
 
     submitForm = async function (values) {
         try {
-            const response = await axios.post(
+            await axios.post(
                 req.client,
                 values,
                 {headers: getAuth()}

@@ -17,7 +17,7 @@ class newClient extends React.Component {
             oldCpf: this.props.location.state.client.cpf,
         }
         try {
-            const response = await axios.patch(
+            await axios.patch(
                 req.client,
                 allValues
             )
