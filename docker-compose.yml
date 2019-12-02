@@ -1,0 +1,37 @@
+version: '3'
+
+services:
+  db:
+    image: mysql
+    container_name: client_register_mysql
+    command: --default-authentication-plugin=mysql_native_password
+    environment:
+      MYSQL_USER: root
+      MYSQL_ROOT_PASSWORD: 1234
+      MYSQL_PASSWORD: 1234
+      MYSQL_DATABASE: client_register
+    ports:
+      - '3306:3306'
+    expose:
+      - '3306'
+
+  client:
+    container_name: client_register_client
+    build: ./client/
+    volumes:
+      - '.:/client/app'
+      - '/app/node_modules'
+    ports:
+      - '3000:3000'
+    environment:
+      - 'NODE_ENV=development'
+    command: npm start
+
+  api:
+    container_name: client_register_api
+    build: ./api/
+    ports:
+      - '1337:1337'
+    command: sails lift --alter
+    depends_on:
+      - db

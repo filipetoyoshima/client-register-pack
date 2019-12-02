@@ -9,8 +9,12 @@ ENV PATH /app/node_modules/.bin:$PATH
 
 # install and cache app dependencies
 COPY . .
-RUN npm install --silent
-RUN npm install react-scripts@3.0.1 -g --silent
+RUN npm install --silent    
+RUN npm audit fix --silent
+RUN npm install sails@1.2.3 -g --silent
+
+# expose the port
+EXPOSE 1337
 
 # start app
-CMD ["npm", "start"]
+CMD ["sails", "lift", "--alter"]
