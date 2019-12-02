@@ -2,7 +2,23 @@
 
 Essa aplicação se trata de um CRUD de clientes, para o qual é necessário estar logado. Todos os clientes são acessíveis por todos os usuários.
 
-## Instruções de Instalação
+## Inicializando Coisas com o Docker
+
+O projeto foi Dockerizado. São três containers, um para um front-end, outro para a API e um para uma instância do MySQL.
+
+Para inicializar o projeto desta forma, garanta que o [Docker](https://docs.docker.com/install/overview/) e o [Docker Compose](https://docs.docker.com/compose/) estejam devidamente instalados na sua máquina. Uma vez que tudo estiver certo, apenas execute:
+
+```bash
+git clone https://github.com/filipetoyoshima/client-register-pack.git
+cd client-register-pack
+
+docker-compose build
+docker-compose up
+```
+
+**Obs:** Talvez seja necessário executar o `docker-compose build` duas vezes em razão de um possível erro no container MySQL. Atente-se a logs de erro durante a primeira execução.
+
+## Instruções de Instalação sem o Docker
 
 Clone o repositório:
 
@@ -68,7 +84,7 @@ sails lift
 
 Após levantar a API, o Sails irá perguntar como quer migrar os dados. Leia as opções disponíveis e escolha a que mais se adequar com suas necessidades.
 
-### Pronto
+## Uso
 
 Com o React online, Sails online (e eventualmente o banco também), abra, no seu navegador, o localhost:3000, e você deverá estar na tela de login:
 
