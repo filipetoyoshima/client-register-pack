@@ -6,7 +6,7 @@ services:
     container_name: client_register_mysql
     command: --default-authentication-plugin=mysql_native_password
     environment:
-      MYSQL_USER: root
+      MYSQL_USER: captain
       MYSQL_ROOT_PASSWORD: 1234
       MYSQL_PASSWORD: 1234
       MYSQL_DATABASE: client_register
@@ -32,6 +32,6 @@ services:
     build: ./api/
     ports:
       - '1337:1337'
-    command: sails lift --alter
+    command: ./wait-for-it.sh db:3306 -t 300 -- sails lift --alter
     depends_on:
       - db

@@ -16,8 +16,6 @@ docker-compose build
 docker-compose up
 ```
 
-**Obs:** Talvez seja necessário executar o `docker-compose build` duas vezes em razão de um possível erro no container MySQL. Atente-se a logs de erro durante a primeira execução.
-
 ## Instruções de Instalação sem o Docker
 
 Clone o repositório:
