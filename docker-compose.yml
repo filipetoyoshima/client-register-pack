@@ -2,7 +2,7 @@ version: '3'
 
 services:
   db:
-    image: mysql
+    image: mysql:8.0.18
     container_name: client_register_mysql
     command: --default-authentication-plugin=mysql_native_password
     environment:
@@ -32,6 +32,6 @@ services:
     build: ./api/
     ports:
       - '1337:1337'
-    command: ./wait-for-it.sh db:3306 -t 300 -- sails lift --alter
+    command: ./wait-for-it.sh db:3306 -t 300 -- sails lift --alter --hookTimeout=120000
     depends_on:
       - db

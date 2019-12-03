@@ -68,7 +68,7 @@ module.exports = {
         .then(response => {
           res.status(200).json(response);
         });
-    } catch {
+    } catch (e) {
       res.status(400).json({
         err: 'CPF inválido'
       })
