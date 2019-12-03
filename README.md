@@ -93,7 +93,7 @@ Para logar, é necessário, obviamente, ter seu usuário registrado no banco de 
 ```js
 {
     "username": "escolhaUmNome",
-    "password": "escolha sua senha",
+    "password": "escolha sua senha"
 }
 ```
 
